@@ -17,12 +17,24 @@ export default class App extends React.Component {
   }
 }
 const Calculator = () => {
-  let [display, setDisplay] = useState(0); 
- 
+  let [display, setDisplay] = useState(0);
 
  const updateState = e => {
    if(display === 0){
-    setDisplay(e.target.value);
+    if(e.target.value == arr[0]){
+     setDisplay(0)
+    }else{
+      setDisplay(e.target.value)
+    }
+   }else if(display[display.indexOf(' ') + 3] == 0){
+    if( e.target.value == 0){
+      setDisplay(display)
+      if(display[display.length -1] === '.'){
+        setDisplay(display + e.target.value)
+      }
+    }else{
+      setDisplay(display + e.target.value)
+    }
    }else{
   setDisplay(display + e.target.value ) 
    }
@@ -30,25 +42,45 @@ const Calculator = () => {
   const operations = e => {
    let value = e.target.value;
    let displayArr = [];
+   displayArr.push(display)
    parseFloat(display);
    if(value === '=') {
-     displayArr.push(display);
-     eval(displayArr);
     setDisplay(eval(...displayArr));
    }else if(value === '+'){
-    setDisplay(display + ' + ');    
-   }else if(value === '-'){
-     setDisplay(display + ' - ');
+    let Result = eval(display)
+    setDisplay(Result + ' + ');     
+   }else if(value === '-'){ 
+     if(display[display.length - 2] === '/' || display[display.length - 2] === '*'){
+      setDisplay(display + '-')
+     }else{
+     let Result = eval(display)
+     setDisplay(Result + ' - ');
+     }
    }else if(value === '*'){
-     setDisplay(display + ' * ');
+     let Result = eval(display)
+     setDisplay(Result + ' * ');
    }else if(value === '/'){
-     setDisplay(display + ' / ')
+     let Result = eval(display);
+     setDisplay(Result + ' / ')
    }else if(value === '.'){
-     let DecimalArr = display.split(' ')
-     if(DecimalArr.hasOwnProperty('.')){
+     let DecimalArr = display.split('');
+     let index = DecimalArr.indexOf('+') + 1;
+     let element = DecimalArr[index].split('');
+     console.log(element)
+     if(DecimalArr.includes('.') === false){
+        setDisplay(display + '.');
+     }else if(element){
+       DecimalArr = display.split(' ');
+      index = DecimalArr.indexOf('+') + 1;
+      element = DecimalArr[index].split('')
+      if(element.includes('.') === false){
+        setDisplay(display + '.')
+      } else {
+        setDisplay(eval(display))
+      }
+     } else {
        setDisplay(display)
-     }else {
-     setDisplay(display + '.')
+
      }
    }else if(value === 'AC'){
      setDisplay(0);
