@@ -21,22 +21,28 @@ const Calculator = () => {
 
  const updateState = e => {
    if(display === 0){
-    if(e.target.value == arr[0]){
+    if(e.target.value == arr[9]){
      setDisplay(0)
+     console.log(0)
     }else{
       setDisplay(e.target.value)
+      console.log(1)
     }
    }else if(display[display.indexOf(' ') + 3] == 0){
     if( e.target.value == 0){
       setDisplay(display)
+      console.log(4)
       if(display[display.length -1] === '.'){
         setDisplay(display + e.target.value)
+        console.log(3)
       }
     }else{
       setDisplay(display + e.target.value)
+      console.log(5)
     }
    }else{
   setDisplay(display + e.target.value ) 
+  console.log(2)
    }
  }
   const operations = e => {
