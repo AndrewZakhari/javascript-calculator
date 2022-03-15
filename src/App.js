@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 
 
 
-let arr = [0,1,2,3,4,5,6,7,8,9];
-let arr2 = ['=','+','-','*','/','.','AC',]
+let arr = [1,2,3,4,5,6,7,8,9,0];
+let arr2 = ['+','-','*','/','.','=','AC']
 export default class App extends React.Component {
   render(){
     return(
@@ -88,15 +88,15 @@ const Calculator = () => {
   }
   
   return(
-    <>
+    <div id="wrapper">
     <div id="display">{display}</div>
-    <div>
-    {arr.map(num => <button onClick={updateState} value={num} id={num}>{num}</button>)}
-    </div>
-    <div>
+    <div id="buttons">
+    <div id="numbers">
+    {arr.map(num => <button onClick={updateState} value={num} id={'i' + num}>{num}</button>)}
     {arr2.map(i => <button onClick={operations} value={i} id={i}>{i}</button>)}
     </div>
-    </>
+    </div>
+    </div>
   )
 }
 
